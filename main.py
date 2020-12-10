@@ -152,7 +152,7 @@ def solve_matrix_for_column(matrix):
     print('strategy')
     strategy = []
     for i, v in enumerate(variables):
-        print(f'x{i} = {v.solution_value()}')
+        print(f'y{i} = {v.solution_value()}')
         strategy.append(v.solution_value())
     print()
     return strategy
