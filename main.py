@@ -66,7 +66,6 @@ def solve_matrix_for_row(matrix):
     return the optimal strategy of row
     """
     print(f"start solving matrix for row. {matrix}")
-    matrix, min_value = positive_matrix(matrix)  # if negative number in matrix
     n = len(matrix)
     m = len(matrix[0])
     # Instantiate a solver
@@ -95,7 +94,7 @@ def solve_matrix_for_row(matrix):
 
     solver.Solve()
 
-    print(f'value = {L.solution_value() + min_value}')
+    print(f'value = {L.solution_value()}')
     print('strategy')
     strategy = []
     for i, v in enumerate(variables):
@@ -119,7 +118,6 @@ def solve_matrix_for_column(matrix):
     return the optimal strategy of row
     """
     print(f"start solving matrix for column. {matrix}")
-    matrix, min_value = positive_matrix(matrix)
     n = len(matrix)
     m = len(matrix[0])
     # Instantiate a solver
@@ -148,7 +146,7 @@ def solve_matrix_for_column(matrix):
 
     solver.Solve()
 
-    print(f'value = {M.solution_value() + min_value}')
+    print(f'value = {M.solution_value()}')
     print('strategy')
     strategy = []
     for i, v in enumerate(variables):
@@ -184,28 +182,13 @@ def all_column_values(matrix, row_strategy):
     print()
 
 
-def positive_matrix(matrix):
-    """
-    All values should be positive.
-    When negative number in matrix, add -min_value to all values
-    """
-    min_value = 0
-    for row in matrix:
-        for v in row:
-            min_value = min(min_value, v)
-    if min_value >= 0:
-        return matrix
-    positive = []
-    for row in matrix:
-        positive.append([v - min_value for v in row])
-    return positive, min_value
-
-
 if __name__ == '__main__':
     # game_matrix = [[1, 4], [3, 2]]
     # solve_matrix_for_row_size_two(game_matrix)
-    # game_matrix = [[0, -1, 1], [1, 0, -1], [-1, 1, 0]]
-    game_matrix = [[-1, 1], [0, -1]]
+    game_matrix = [[0, -1, 1], [1, 0, -1], [-1, 1, 0]]
+    # game_matrix = [[-1, 1], [1, -1]]
+    # solve_matrix_for_row_size_two(game_matrix)
+    # exit()
     # game_matrix = [[0, 2], [1, 0]]
     r_strategy = solve_matrix_for_row(game_matrix)
     c_strategy = solve_matrix_for_column(game_matrix)
